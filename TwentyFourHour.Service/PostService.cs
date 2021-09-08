@@ -64,14 +64,19 @@ namespace TwentyFourHour.Service
                 var entity =
                     ctx
                     .Posts
-                    .Single(e => e.PostId == id && e.AuthorId == _userId);
+                    .SingleOrDefault(e => e.PostId == id && e.AuthorId == _userId);
                 return
                     new PostDetail()
                     {
                         PostId = entity.PostId,
                         Title = entity.Title,
                         Text = entity.Text,
-                        Comments = ctx.Comments.Where(c => c.PostId == id)
+                        Comments = ctx.Comments.Where(c => c.PostId == id).Select(c => new PostCommentDetail()
+                        {
+                            CommentId = c.CommentId,
+                            CreatedUtc = c.CreatedUtc,
+                            Text = c.Text
+                        }).ToList()
                     };
             }
         }
