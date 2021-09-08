@@ -46,11 +46,11 @@ namespace TwentyFourHour.Service
             {
                 var query = ctx
                                 .Comments
-                               .SingleOrDefault(e => e.Id == id);
+                               .SingleOrDefault(e => e.CommentId == id);
 
                 return new ReplyCommentDetail()
                 {
-                    CommentId = query.Id,
+                    CommentId = query.CommentId,
                     CreatedUtc = query.CreatedUtc,
                     ModifiedUtc = query.ModifiedUtc,
                     Text = query.Text,
