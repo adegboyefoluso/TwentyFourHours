@@ -5,23 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwentyFourHours.Data
+namespace TwentyFourHour.Model
 {
-    public class Comment
+    public class CommentListItem
     {
-
         [Key]
         public int CommentId { get; set; }
         [Required]
-        public Guid AuthorId { get; set; }
-        [Required]
         public string Comment { get; set; }
         [Required]
+        public virtual Post postid { get; set; }
+        [Display(Name ="Created")]
         public DateTimeOffset CreatedUtc { get; set; }
-        [Required]
-        public DateTimeOffset ModifiedUtc { get; set; }
-        [Required]
-        public virtual Post Post { get; set; }
-        public virtual List<Like> Likes { get; set; }
+
     }
 }
