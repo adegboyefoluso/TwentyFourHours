@@ -22,5 +22,6 @@ namespace TwentyFourHours.Data
         public DateTimeOffset ModifiedUtc { get; set; }
         [Required]
         public virtual Post Post { get; set; }
+        public virtual List<Like> Likes { get; set; }
     }
 }
