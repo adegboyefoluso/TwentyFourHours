@@ -11,7 +11,7 @@ namespace TwentyFourHours.Data
     {
 
         [Key]
-        public int Id { get; set; }
+        public int CommentId { get; set; }
         [Required]
         public Guid AuthorId { get; set; }
         [Required]
@@ -21,6 +21,9 @@ namespace TwentyFourHours.Data
         [Required]
         public DateTimeOffset ModifiedUtc { get; set; }
         [Required]
-        public virtual Post Post { get; set; }
+        public int PostId { get; set; }
+        public virtual List<Like> Likes { get; set; }
+        public int PostId { get; set; }
+        public virtual List<Reply> Replies { get; set; } = new List<Reply>();
     }
 }
