@@ -21,7 +21,7 @@ namespace TwentyFourHours.Data
         [Required]
         public DateTimeOffset ModifiedUtc { get; set; }
         [Required]
-        public virtual Post Post { get; set; }
+        public int PostId { get; set; }
         public virtual List<Like> Likes { get; set; }
         public int PostId { get; set; }
         public virtual List<Reply> Replies { get; set; } = new List<Reply>();
