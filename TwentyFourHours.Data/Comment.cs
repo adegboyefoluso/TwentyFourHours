@@ -24,5 +24,6 @@ namespace TwentyFourHours.Data
         public virtual Post Post { get; set; }
         public virtual List<Like> Likes { get; set; }
         public int PostId { get; set; }
+        public virtual List<Reply> Replies { get; set; } = new List<Reply>();
     }
 }
