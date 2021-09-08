@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwentyFourHour.Model;
 
 namespace TwentyFourHours.Data
 {
@@ -21,7 +22,7 @@ namespace TwentyFourHours.Data
         [Required]
         public string Text { get; set; }
 
-        public virtual List<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual List<PostCommentDetail> Comments { get; set; } = new List<PostCommentDetail>();
         public virtual List<Like> Likes { get; set; } = new List<Like>();
 
         public DateTimeOffset CreatedUtc { get; set; }
