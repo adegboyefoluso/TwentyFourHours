@@ -8,5 +8,8 @@ namespace TwentyFourHour.Model
 {
     public class CommentUpdate
     {
+        public int CommentId { get; set; }
+        public string Comment { get; set; }
+
     }
 }

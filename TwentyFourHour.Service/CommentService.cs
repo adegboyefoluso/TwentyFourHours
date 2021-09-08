@@ -22,7 +22,7 @@ namespace TwentyFourHour.Service
                 {
                     AuthorId = _userId,
                     //Id = model.Id,
-                    Text = model.Comment
+                    Comment = model.Comment
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -40,14 +40,14 @@ namespace TwentyFourHour.Service
                                 Select(c =>
                                 new CommentListItem
                                 {
-                                    CommentId = c.Id,
-                                    Comment = c.Text,
-                                    Post = c.Post.Text
+                                    CommentId = c.CommentId,
+                                    Comment = c.Comment,
+                                    PostId = c.Post.Text
                                 });
                 return post.ToArray();
             }
         }
-        public CommentContents GetCommentByPostId(int id) // Get comments by PostId
+        public CommentDetails GetCommentByPostId(int id) // Get comments by PostId
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -56,15 +56,35 @@ namespace TwentyFourHour.Service
                     .Comments
                     .Single(e => e.PostId == id && e.AuthorId == _userId);
                 return
-                new CommentContents
+                new CommentDetails
                 {
                     CommentId = entity.Id,
-                    Text = entity.Text,
+                    Comment = entity.Comment,
                     CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.ModifiedUtc
                 };
             }
         }
+        public CommentDetails GetCommentById(int id) // get comment by id
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Comments
+                    .Single(e => e.CommentId == id && e.AuthorId == _userId);
+                return
+                    new CommentDetails
+                    {
+                        CommentId = entity.CommentId,
+                        Comment = entity.Comment,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc,
+                        PostId = entity.PostId
+                    };
+            }
+        }
+
+        
         public bool UpdateComment(CommentUpdate model) // Update comment
         {
             using (var ctx = new ApplicationDbContext())
@@ -72,9 +92,9 @@ namespace TwentyFourHour.Service
                 var entity =
                     ctx
                     .Comments
-                    .Single(e => e.Id == model.CommentId && e.AuthorId == _userId);
-                entity.Id = model.CommentId;
-                entity.Text = model.Text;
+                    .Single(e => e.CommentId == model.CommentId && e.AuthorId == _userId);
+                entity.CommentId = model.CommentId;
+                entity.Comment = model.Comment;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
                 return ctx.SaveChanges() == 1;
             }
@@ -86,7 +106,7 @@ namespace TwentyFourHour.Service
                 var entity =
                     ctx
                     .Comments
-                    .Single(e => e.Id == commentId && e.AuthorId == _userId);
+                    .Single(e => e.CommentId == commentId && e.AuthorId == _userId);
                 ctx.Comments.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

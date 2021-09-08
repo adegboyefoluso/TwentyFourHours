@@ -11,11 +11,11 @@ namespace TwentyFourHours.Data
     {
 
         [Key]
-        public int Id { get; set; }
+        public int CommentId { get; set; }
         [Required]
         public Guid AuthorId { get; set; }
         [Required]
-        public string Text { get; set; }
+        public string Comment { get; set; }
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
         [Required]

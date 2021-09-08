@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TwentyFourHour.Model
 {
-    public class CommentListItem
+    public class CommentDetails
     {
-        [Key]
         public int CommentId { get; set; }
-        [Required]
         public string Comment { get; set; }
-        [Required]
-        public virtual Post postid { get; set; }
-        [Display(Name ="Created")]
         public DateTimeOffset CreatedUtc { get; set; }
-
+        public DateTimeOffset ModifiedUtc { get; set; }
+        public virtual PostId Post { get; set; }
     }
 }
