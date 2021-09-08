@@ -15,13 +15,13 @@ namespace TwentyFourHours.Data
         [Required]
         public Guid AuthorId { get; set; }
         [Required]
-        public string Comment { get; set; }
+        public string Text { get; set; }
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
         [Required]
         public DateTimeOffset ModifiedUtc { get; set; }
         [Required]
-        public virtual Post Post { get; set; }
+        public int PostId { get; set; }
         public virtual List<Like> Likes { get; set; }
     }
 }

@@ -12,9 +12,9 @@ namespace TwentyFourHour.Model
         [Key]
         public int CommentId { get; set; }
         [Required]
-        public string Comment { get; set; }
+        public int PostId { get; set; }
         [Required]
-        public virtual Post postid { get; set; }
+        public string Text { get; set; }
         [Display(Name ="Created")]
         public DateTimeOffset CreatedUtc { get; set; }
 

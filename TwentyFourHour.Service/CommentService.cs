@@ -22,7 +22,7 @@ namespace TwentyFourHour.Service
                 {
                     AuthorId = _userId,
                     //Id = model.Id,
-                    Comment = model.Comment
+                    Text = model.Comment
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -30,7 +30,8 @@ namespace TwentyFourHour.Service
                 return ctx.SaveChanges() == 1;
             }
         }
-        public IEnumerable<CommentListItem> GetCommentByAuthorId()  // get comment by Author id
+
+        public IEnumerable<CommentListItem> GetAllComments()  // get all comments
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -41,12 +42,29 @@ namespace TwentyFourHour.Service
                                 new CommentListItem
                                 {
                                     CommentId = c.CommentId,
-                                    Comment = c.Comment,
-                                    PostId = c.Post.Text
+                                    Text = c.Text,
+                                    PostId = c.PostId
                                 });
                 return post.ToArray();
             }
         }
+        //public IEnumerable<CommentListItem> GetCommentByAuthorId()  // get comment by Author id
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var post = ctx
+        //                        .Comments
+        //                        .Where(c => c.AuthorId == _userId).
+        //                        Select(c =>
+        //                        new CommentListItem
+        //                        {
+        //                            CommentId = c.CommentId,
+        //                            Text = c.Text,
+        //                            PostId = c.PostId
+        //                        });
+        //        return post.ToArray();
+        //    }
+        //}
         public CommentDetails GetCommentByPostId(int id) // Get comments by PostId
         {
             using (var ctx = new ApplicationDbContext())
@@ -58,8 +76,8 @@ namespace TwentyFourHour.Service
                 return
                 new CommentDetails
                 {
-                    CommentId = entity.Id,
-                    Comment = entity.Comment,
+                    CommentId = entity.CommentId,
+                    Comment = entity.Text,
                     CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.ModifiedUtc
                 };
@@ -76,7 +94,7 @@ namespace TwentyFourHour.Service
                     new CommentDetails
                     {
                         CommentId = entity.CommentId,
-                        Comment = entity.Comment,
+                        Comment = entity.Text,
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc,
                         PostId = entity.PostId
@@ -94,7 +112,7 @@ namespace TwentyFourHour.Service
                     .Comments
                     .Single(e => e.CommentId == model.CommentId && e.AuthorId == _userId);
                 entity.CommentId = model.CommentId;
-                entity.Comment = model.Comment;
+                entity.Text = model.Text;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
                 return ctx.SaveChanges() == 1;
             }

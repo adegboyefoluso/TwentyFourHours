@@ -12,6 +12,6 @@ namespace TwentyFourHour.Model
         public string Comment { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
         public DateTimeOffset ModifiedUtc { get; set; }
-        public virtual PostId Post { get; set; }
+        public int PostId { get; set; }
     }
 }
